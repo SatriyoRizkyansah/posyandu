@@ -30,8 +30,8 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Jadwal terbaru</h4>
-
-                @if(!empty($jadwal) && count($jadwal) > 0)
+            
+                @if(!empty($jadwal) && $jadwal->gambar)
                 <img src="{{ asset('img/jadwal/'.$jadwal->gambar) }}" alt="people" class="img-fluid" style=" object-fit: cover;">
                 @else
                 <div>Belum ada jadwal yang di upload</div>

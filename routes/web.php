@@ -28,6 +28,10 @@ Route::middleware('auth')->group(function () {
 
         //  Manage data petugas
         Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index');
+        Route::get('/petugas/print', [PetugasController::class, 'print'])->name('petugas.cetak');
+        Route::get('/petugas/create', [PetugasController::class, 'create'])->name('petugas.create');
+        Route::post('/petugas/create', [PetugasController::class, 'store'])->name('petugas.store');
+        Route::delete('/petugas/delete/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
     });
     //  logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
