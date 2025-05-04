@@ -35,16 +35,20 @@
                             <tr>
                                 <td>{{ $perkembangan->anak->nama }}</td>
                                 <td>{{ $perkembangan->tanggal_posyandu }}</td>
-                                <td>{{ $perkembangan->berat_badan }}</td>
+                                <td>{{ $perkembangan->berat_badan }} KG</td>
                                 <td>{{ $perkembangan->ket_bb }}</td>
-                                <td>{{ $perkembangan->tinggi_badan }}</td>
+                                <td>{{ $perkembangan->tinggi_badan }} CM</td>
                                 <td>{{ $perkembangan->ket_tb }}</td>
                                 <td>
-                                <form action="{{ route('perkembangan.destroy', $perkembangan->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
+                                    <div class="d-flex">
+                                        <a href="{{ route('perkembangan.edit', $perkembangan->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                                         
+                                        <form action="{{ route('perkembangan.destroy', $perkembangan->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

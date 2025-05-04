@@ -38,7 +38,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/perkembangan', [PerkembanganAnakController::class, 'index'])->name('perkembangan.index');
         Route::get('/perkembangan/create', [PerkembanganAnakController::class, 'create'])->name('perkembangan.create');
         Route::post('/perkembangan/create', [PerkembanganAnakController::class, 'store'])->name('perkembangan.store');
+        Route::get('/perkembangan/edit/{id}', [PerkembanganAnakController::class, 'edit'])->name('perkembangan.edit');
+        Route::post('/perkembangan/edit/{id}', [PerkembanganAnakController::class, 'update'])->name('perkembangan.edit');
         Route::delete('/perkembangan/delete/{id}', [PerkembanganAnakController::class, 'delete'])->name('perkembangan.destroy');
+        
     });
     //  logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

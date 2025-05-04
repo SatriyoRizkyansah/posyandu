@@ -64,16 +64,25 @@
       </div>
 
       <!-- partial -->
-      <!-- partial Sidebar -->
       @include('partials.sidebar')
-            
       <!-- partial -->
       <div class="main-panel">
         
+        
         {{-- Alert sukses --}}
         @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show"role="alert">
+              <div class="alert alert-success alert-dismissible fade show mx-auto mt-3" role="alert" style="width: 98%">
                 {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert"aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+ 
+        {{-- Alert error --}}
+        @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show"role="alert">
+                {{ session('error') }}
                 <button type="button" class="close" data-dismiss="alert"aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
