@@ -3,6 +3,7 @@
 use App\Http\Controllers\JadwalPosyanduController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrangtuaController;
+use App\Http\Controllers\PerkembanganAnakController;
 use App\Http\Controllers\PetugasController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/petugas/create', [PetugasController::class, 'create'])->name('petugas.create');
         Route::post('/petugas/create', [PetugasController::class, 'store'])->name('petugas.store');
         Route::delete('/petugas/delete/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
+
+        // Manage data perkembangan anak
+        Route::get('/perkembangan', [PerkembanganAnakController::class, 'index'])->name('perkembangan.index');
+        Route::get('/perkembangan/create', [PerkembanganAnakController::class, 'create'])->name('perkembangan.create');
+        Route::post('/perkembangan/create', [PerkembanganAnakController::class, 'store'])->name('perkembangan.store');
+        Route::delete('/perkembangan/delete/{id}', [PerkembanganAnakController::class, 'delete'])->name('perkembangan.destroy');
     });
     //  logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
