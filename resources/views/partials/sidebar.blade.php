@@ -9,6 +9,8 @@
         </style>
 
         <ul class="nav">
+              {{-- <img src="{{ asset('images/logo/logo.png') }}" class="mr-2" alt="logo" />
+              <h4>Posyandu mawar indah IX</h4> --}}
           <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard.admin.home') }}">
               <i class="icon-grid menu-icon"></i>
@@ -32,6 +34,16 @@
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Petugas</span>
             </a>
+          </li>
+
+          <li class="nav-item">
+            <form action="/logout" method="post">
+              @csrf
+              <button class="nav-link" type="submit" style="border: none; background: none; padding: 4;">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Logout</span>
+              </button>
+            </form>
           </li>
           
         </ul>
