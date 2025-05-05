@@ -24,6 +24,7 @@
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="row">
+                
                 <div class="col-md-3 mb-4 transparent">
                   <a href="{{ route('perkembangan.index') }}" class="text-decoration-none">
                     <div class="card card-tale card-strech">
@@ -44,7 +45,8 @@
 
                 <div class="col-md-3 mb-4 transparent stretch-card">
                   <div class="card card-dark-blue">
-                    <div class="card-body">
+                    <a href="{{ route('imunisasi.index') }}" class="text-decoration-none text-white">
+                      <div class="card-body">
                       <div class="row align-items-center">
                         <div class="col-4">
                           <img src="{{ asset('images/icon/imunisasi.png') }}" alt="" class="img-fluid w-100">
@@ -55,6 +57,7 @@
                         </div>
                       </div>
                     </div>
+                    </a>
                   </div>
                 </div>
 

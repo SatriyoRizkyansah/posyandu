@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\JadwalPosyanduController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrangtuaController;
@@ -41,6 +42,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/perkembangan/edit/{id}', [PerkembanganAnakController::class, 'edit'])->name('perkembangan.edit');
         Route::post('/perkembangan/edit/{id}', [PerkembanganAnakController::class, 'update'])->name('perkembangan.edit');
         Route::delete('/perkembangan/delete/{id}', [PerkembanganAnakController::class, 'delete'])->name('perkembangan.destroy');
+
+        // Manage data Imunisasi
+        Route::get('/imunisasi', [ImunisasiController::class, 'index'])->name('imunisasi.index');
+        Route::get('/imunisasi/create', [ImunisasiController::class, 'create'])->name('imunisasi.create');
+        Route::post('/imunisasi/create', [ImunisasiController::class, 'store'])->name('imunisasi.store');
+        Route::get('/imunisasi/edit/{id}', [ImunisasiController::class, 'edit'])->name('imunisasi.edit');
+        Route::post('/imunisasi/edit/{id}', [ImunisasiController::class, 'update'])->name('imunisasi.edit');
+        Route::delete('/imunisasi/delete/{id}', [ImunisasiController::class, 'delete'])->name('imunisasi.destroy');
         
     });
     //  logout
