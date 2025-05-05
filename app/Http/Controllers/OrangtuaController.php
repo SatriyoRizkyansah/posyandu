@@ -24,7 +24,7 @@ class OrangtuaController extends Controller
     {
         $request->validate([
             'nik' => 'required',
-            'nik' => 'required|unique:orangtua,nik',
+            // 'nik' => 'required|unique:orangtua,nik',
             'nama_ibu' => 'required',
             'no_telp_ibu' => 'required',
             'alamat' => 'required',
@@ -52,10 +52,11 @@ class OrangtuaController extends Controller
             'nama' => $request->nama_anak,
             'id_orangtua' => $orangtua->id,
             'tanggal_lahir' => $request->tanggal_lahir,
+            'tempat_lahir' => $request->tempat_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        return redirect()->back()->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('orangtua.index')->with('success', 'Data berhasil disimpan!');
     }
 
     public function show($id)
@@ -89,9 +90,10 @@ class OrangtuaController extends Controller
         return redirect()->route('orangtua.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        // Delete the record
+        Orangtua::destroy($id);
+        return redirect()->route('orangtua.index')->with('success', 'Data berhasil dihapus!');
     }
     
 }

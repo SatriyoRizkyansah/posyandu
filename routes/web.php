@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnakController;
 use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\JadwalPosyanduController;
 use App\Http\Controllers\LoginController;
@@ -52,7 +53,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/imunisasi/edit/{id}', [ImunisasiController::class, 'update'])->name('imunisasi.edit');
         Route::delete('/imunisasi/delete/{id}', [ImunisasiController::class, 'delete'])->name('imunisasi.destroy');
 
-        // Managa data orang tua & anak
+        // Managa data orang tua
         Route::get('/orangtua', [OrangtuaController::class, 'index'])->name('orangtua.index');
         Route::get('/orangtua/create', [OrangtuaController::class, 'create'])->name('orangtua.create');
         Route::post('/orangtua/create', [OrangtuaController::class, 'store'])->name('orangtua.store');
@@ -61,7 +62,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('/orangtua/delete/{id}', [OrangtuaController::class, 'delete'])->name('orangtua.destroy');
 
         // Anak
-        
+        Route::get('/anak', [AnakController::class, 'index'])->name('anak.index');
+        Route::get('/anak/create/{id}', [AnakController::class, 'create'])->name('anak.create');
+        Route::post('/anak/create', [AnakController::class, 'store'])->name('anak.store');
+        Route::get('/anak/edit/{id}', [AnakController::class, 'edit'])->name('anak.edit');
+        Route::post('/anak/edit/{id}', [AnakController::class, 'update'])->name('anak.edit');
+        Route::delete('/anak/delete/{id}', [AnakController::class, 'delete'])->name('anak.destroy');
         
     });
     //  logout

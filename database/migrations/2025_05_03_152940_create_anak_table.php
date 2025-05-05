@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->unsignedBigInteger('id_orangtua');
             $table->date('tanggal_lahir');
+            $table->string('tempat_lahir');
             $table->string('jenis_kelamin');
             $table->foreign('id_orangtua')->references('id')->on('orangtua')->onDelete('cascade');
             $table->timestamps();

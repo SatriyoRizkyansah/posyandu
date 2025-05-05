@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Anak;
+use App\Models\Imunisasi;
+use App\Models\Orangtua;
+use App\Models\PerkembanganAnak;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -56,7 +60,22 @@ class LoginController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard.admin.index');
+        $perkembanganAnakCount = PerkembanganAnak::count();
+        $imunisasiCount = Imunisasi::count();
+        $orangTuaCount = Orangtua::count();
+        $anakCount = Anak::count();
+        $anak = Anak::all();
+        
+        $dataCount = [
+            'perkembanganAnakCount' => $perkembanganAnakCount,
+            'imunisasiCount' => $imunisasiCount,
+            'orangTuaCount' => $orangTuaCount,
+            'anakCount' => $anakCount,
+            'anak' => $anak
+        ];
+
+        return view('dashboard.admin.index', compact('dataCount'));
+        // return view('dashboard.admin.index');
     }
 
 }

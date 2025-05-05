@@ -17,6 +17,7 @@ class Anak extends Model
         'nama',
         'id_orangtua',
         'tanggal_lahir',
+        'tempat_lahir',
         'jenis_kelamin',
     ];
 

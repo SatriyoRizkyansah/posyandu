@@ -78,6 +78,6 @@ class ImunisasiController extends Controller
         $imunisasi = Imunisasi::findOrFail($id);
         $imunisasi->delete();
 
-        return redirect()->route('imunisasi.index')->with('success', 'Data imunisasi anak berhasil dihapus.');
+        return redirect()->route('imunisasi.index')->with('success', 'Data perkembangan anak berhasil dihapus.');
     }
 }
