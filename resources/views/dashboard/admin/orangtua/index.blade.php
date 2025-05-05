@@ -44,7 +44,7 @@
                                             <option value="{{ $anak->id }}">{{ $anak->nama }}</option>
                                         @endforeach
                                     </select>
-                                </td>
+                                 </td>
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{ route('orangtua.edit', $orangtua->id) }}" class="btn btn-warning btn-sm mr-2 text-white">Edit</a>
