@@ -63,7 +63,8 @@
 
                 <div class="col-md-3 mb-4 transparent stretch-card">
                   <div class="card card-light-blue">
-                    <div class="card-body">
+                    <a href="{{ route('orangtua.index') }}" class="text-decoration-none text-white">
+                      <div class="card-body">
                       <div class="row align-items-center">
                         <div class="col-4">
                           <img src="{{ asset('images/icon/orangtua.png') }}" alt="" class="img-fluid w-100">
@@ -74,6 +75,7 @@
                         </div>
                       </div>
                     </div>
+                    </a>
                   </div>
                 </div>
 

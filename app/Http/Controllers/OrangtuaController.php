@@ -10,7 +10,9 @@ class OrangtuaController extends Controller
 {
     public function index()
     {
-        // return view('orangtua.index');
+        return view('dashboard.admin.orangtua.index', [
+            'orangtua_data' => Orangtua::with('anak')->get(),
+        ]);
     }
 
     public function create()
@@ -63,12 +65,28 @@ class OrangtuaController extends Controller
 
     public function edit($id)
     {
-        // Edit a specific record
+        $orangtua_data = Orangtua::findOrFail($id);
+        return view('dashboard.admin.orangtua.edit', compact('orangtua_data'));
     }
 
     public function update(Request $request, $id)
     {
-        // Update the record
+        $request->validate([
+            'nik' => 'required',
+            'nama_ibu' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        // Update data orangtua
+        Orangtua::where('id', $id)->update([
+            'nik' => $request->nik,
+            'nama_ibu' => $request->nama_ibu,
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
+        ]);
+        
+        return redirect()->route('orangtua.index')->with('success', 'Data berhasil diupdate!');
     }
 
     public function destroy($id)

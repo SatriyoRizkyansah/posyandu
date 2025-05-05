@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrangtuaController;
 use App\Http\Controllers\PerkembanganAnakController;
 use App\Http\Controllers\PetugasController;
+use App\Models\Orangtua;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,7 +24,7 @@ Route::middleware('auth')->group(function () {
         // Insert data orangtua dan anak
         Route::get('/pendaftaran', [OrangtuaController::class, 'create'])->name('pendaftaran.create');
         Route::post('/pendaftaran', [OrangtuaController::class, 'store'])->name('pendaftaran.store');
-
+        
         // Jadwal
          Route::get('/jadwal', [JadwalPosyanduController::class, 'index'])->name('jadwal.index');
          Route::post('/jadwal', [JadwalPosyanduController::class, 'store'])->name('jadwal.store');
@@ -50,6 +51,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/imunisasi/edit/{id}', [ImunisasiController::class, 'edit'])->name('imunisasi.edit');
         Route::post('/imunisasi/edit/{id}', [ImunisasiController::class, 'update'])->name('imunisasi.edit');
         Route::delete('/imunisasi/delete/{id}', [ImunisasiController::class, 'delete'])->name('imunisasi.destroy');
+
+        // Managa data orang tua & anak
+        Route::get('/orangtua', [OrangtuaController::class, 'index'])->name('orangtua.index');
+        Route::get('/orangtua/create', [OrangtuaController::class, 'create'])->name('orangtua.create');
+        Route::post('/orangtua/create', [OrangtuaController::class, 'store'])->name('orangtua.store');
+        Route::get('/orangtua/edit/{id}', [OrangtuaController::class, 'edit'])->name('orangtua.edit');
+        Route::post('/orangtua/edit/{id}', [OrangtuaController::class, 'update'])->name('orangtua.edit');
+        Route::delete('/orangtua/delete/{id}', [OrangtuaController::class, 'delete'])->name('orangtua.destroy');
+
+        // Anak
+        
         
     });
     //  logout
