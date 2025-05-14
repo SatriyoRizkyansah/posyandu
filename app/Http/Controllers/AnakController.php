@@ -15,6 +15,15 @@ class AnakController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $anak_data = Anak::with('orangtua') 
+                    ->findOrFail($id);
+
+        return view('dashboard.admin.anak.detail', compact('anak_data'));
+    }
+
+
     public function create($id)
     {
         $orangtua_data = Orangtua::findOrFail($id);
@@ -35,7 +44,9 @@ class AnakController extends Controller
         ]);
 
         // Generate ID anak unik 
-        $uniqueId = 'A' . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        do {
+            $uniqueId = 'A' . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        } while (Anak::where('id', $uniqueId)->exists());
 
         // Ambil Id orangtua
         $orangtua = Orangtua::where('nik', $validatedData['nik_ibu'])->first();

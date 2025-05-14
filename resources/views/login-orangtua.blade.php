@@ -84,19 +84,16 @@
               <form method="POST" class="pt-3">
                 @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="username" placeholder="Username">
+                  <input type="text" class="form-control form-control-lg" name="nik" placeholder="Username">
                 </div>
                 <div class="form-group position-relative">
-                  <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg" name="no_telp" placeholder="Password">
                   <!-- Optional: icon visibility bisa ditambahkan di sini -->
                 </div>
                 <div class="mt-3">
                   <button class="btn btn-block btn-lg font-weight-medium auth-form-btn text-white">Masuk</button>
                 </div>
               </form>
-              <div class="text-center mt-4 font-weight-light">
-                Login disini sebagai <a href="/login-orangtua"><span class="font-weight-bold">OrangTua</span></a>
-              </div>
             </div>
 
           </div>

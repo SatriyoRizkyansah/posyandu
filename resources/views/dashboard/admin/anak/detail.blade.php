@@ -59,15 +59,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($anak_data as $anak)
                             <tr>
-                                <td>{{ $anak->id }}</td>
-                                <td>{{ $anak->orangtua->nama_ibu }}</td>
-                                <td>{{ $anak->nama }}</td>
-                                <td>{{ $anak->tanggal_lahir }}</td>
+                                <td>{{ $anak_data->id }}</td>
+                                <td>{{ $anak_data->orangtua->nama_ibu }}</td>
+                                <td>{{ $anak_data->nama }}</td>
+                                <td>{{ $anak_data->tanggal_lahir }}</td>
 
                                 @php
-                                    $tanggalLahir = Carbon::parse($anak->tanggal_lahir);
+                                    $tanggalLahir = Carbon::parse($anak_data->tanggal_lahir);
                                     $sekarang = Carbon::now();
                                     $umurTahun = $tanggalLahir->diff($sekarang)->y;
                                     $umurBulan = $tanggalLahir->diff($sekarang)->m;
@@ -77,9 +76,9 @@
 
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                                        <a href="{{ route('anak.edit', $anak_data->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
                                          
-                                        <form action="{{ route('anak.destroy', $anak->id) }}" method="POST">
+                                        <form action="{{ route('anak.destroy', $anak_data->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
@@ -87,7 +86,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
                         </tbody>
                       </table>
                     </div>

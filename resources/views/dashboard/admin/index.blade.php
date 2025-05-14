@@ -98,16 +98,31 @@
 
 
           <div class="row">
-            <div class="col-12 grid-margin stretch-card">
+            {{-- udah jalan --}}
+            <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                  <div class="d-flex justify-content-between">
-                  <p class="card-title">Sales Report</p>
-                  <a href="#" class="text-info">View all</a>
+                  <p class="card-title">Grafik Usia Anak</p>
+                  {{-- <a href="#" class="text-info">View all</a> --}}
                  </div>
-                  <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
+                  <p class="font-weight-500">Grafik usia anak pertriwulan</p>
                   <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
                   <canvas id="sales-chart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            {{-- belum jalan --}}
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 <div class="d-flex justify-content-between">
+                  <p class="card-title">Grafik Usia Anak</p>
+                 </div>
+                  <p class="font-weight-500">Grafik usia anak pertahun (1-4 tahun)</p>
+                  <div id="yearly-legend" class="chartjs-legend mt-4 mb-2"></div>
+                  <canvas id="yearly-chart"></canvas>
                 </div>
               </div>
             </div>
@@ -116,15 +131,94 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dataTriwulan = @json($dataTriwulan);
+
+        const ctx = document.getElementById('sales-chart').getContext('2d');
+        // Hapus chart lama jika sudah ada
+        if (window.salesChartInstance) {
+            window.salesChartInstance.destroy();
+        }
+
+        window.salesChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['0-3 Bulan', '4-6 Bulan', '7-9 Bulan', '10-12 Bulan'],
+                datasets: [{
+                    label: 'Jumlah Anak',
+                    data: [
+                        dataTriwulan['0-3'],
+                        dataTriwulan['4-6'],
+                        dataTriwulan['7-9'],
+                        dataTriwulan['10-12']
+                    ],
+                    backgroundColor: '#28a745',
+                    borderColor: '#28a745',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const dataTahunan = @json($dataTahunan);
+
+      const ctxTahunan = document.getElementById('yearly-chart').getContext('2d');
+      new Chart(ctxTahunan, {
+          type: 'pie', // atau 'doughnut', 'bar', dll
+          data: {
+              labels: ['1 Tahun', '2 Tahun', '3 Tahun', '4 Tahun'],
+              datasets: [{
+                  label: 'Jumlah Anak',
+                  data: [
+                      dataTahunan['1'],
+                      dataTahunan['2'],
+                      dataTahunan['3'],
+                      dataTahunan['4']
+                  ],
+                  backgroundColor: ['#007bff', '#8000ff', '#28a745', '#ff8000'],
+              }]
+          },
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'bottom',
+                  }
+              }
+          }
+      });
+  });
+</script>
+
+
+
 
   <!-- plugins:js -->
   <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
-  {{-- <script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script> --}}
-  {{-- <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script> --}}
-  {{-- <script src="{{ asset('js/dataTables.select.min.js') }}"></script> --}}
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
@@ -135,7 +229,7 @@
   <script src="{{ asset('js/todolist.js') }}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="{{ asset('js/dashboard.js') }}"></script>
-  <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
+  {{-- <script src="{{ asset('js/dashboard.js') }}"></script>
+  <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script> --}}
   <!-- End custom js for this page-->
 @endsection

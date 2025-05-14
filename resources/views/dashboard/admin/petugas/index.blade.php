@@ -1,4 +1,37 @@
 @extends('partials.app')
+
+@section('head')
+<style>
+      /* Saat hover (tombol aktif & biasa) */
+      .pagination .page-link:hover {
+        background-color: #28a745 !important; /* green */
+        border-color: #28a745 !important;
+        color: #fff !important;
+      }
+
+      /* Warna default semua link pagination */
+      .pagination .page-link {
+        color: #28a745 !important;
+        border-color: #28a745 !important;
+      }
+
+      /* Tombol aktif (yang sedang dipilih) */
+      .pagination .page-item.active .page-link {
+        background-color: #28a745 !important;
+        border-color: #28a745 !important;
+        color: white !important;
+      }
+
+      /* Tombol disabled (previous/next) */
+      .pagination .page-item.disabled .page-link {
+        color: #999 !important;
+        background-color: #f1f1f1 !important;
+        border-color: #ddd !important;
+      }
+
+    </style>
+@endsection
+
 @section('content')
 
 <div class="content-wrapper" style="background-color: #CDE6B4">

@@ -1,22 +1,18 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Orangtua extends Model
+class Orangtua extends Authenticatable
 {
-    use HasFactory;
-
     protected $table = 'orangtua';
-    protected $fillable = [
-        'nik',
-        'nama_ibu',
-        'no_telp',
-        'alamat',
-    ];
 
+    protected $fillable = ['nik', 'no_telp', 'nama_ibu', 'alamat', 'created_at', 'updated_at'];
+
+    public function getAuthPassword()
+    {
+        return $this->no_telp;
+    }
 
     public function anak()
     {

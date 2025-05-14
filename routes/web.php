@@ -11,11 +11,15 @@ use App\Models\Orangtua;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
+    // return view('welcome');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('auth');
+
+Route::get('/login-orangtua', [LoginController::class, 'formOrangtua'])->middleware('guest')->name('login.orangtua');
+Route::post('/login-orangtua', [LoginController::class, 'authOrangtua'])->name('auth.orangtua');
 
 Route::middleware('auth')->group(function () {
     // Dashboard admin
@@ -55,6 +59,9 @@ Route::middleware('auth')->group(function () {
 
         // Managa data orang tua
         Route::get('/orangtua', [OrangtuaController::class, 'index'])->name('orangtua.index');
+
+        // /dashboard/admin/orangtua
+
         Route::get('/orangtua/create', [OrangtuaController::class, 'create'])->name('orangtua.create');
         Route::post('/orangtua/create', [OrangtuaController::class, 'store'])->name('orangtua.store');
         Route::get('/orangtua/edit/{id}', [OrangtuaController::class, 'edit'])->name('orangtua.edit');
@@ -63,6 +70,7 @@ Route::middleware('auth')->group(function () {
 
         // Anak
         Route::get('/anak', [AnakController::class, 'index'])->name('anak.index');
+        Route::get('/anak/{id}', [AnakController::class, 'show'])->name('anak.show');
         Route::get('/anak/create/{id}', [AnakController::class, 'create'])->name('anak.create');
         Route::post('/anak/create', [AnakController::class, 'store'])->name('anak.store');
         Route::get('/anak/edit/{id}', [AnakController::class, 'edit'])->name('anak.edit');
@@ -73,3 +81,23 @@ Route::middleware('auth')->group(function () {
     //  logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+Route::middleware('orangtua')->group(function () {
+    Route::get('/dashboard/orangtua/home', [LoginController::class, 'dashboard_orangtua'])->name('dashboard.orangtua.home');
+
+    // Perkembangan anak
+    Route::get('/dashboard/orangtua/daftar_anak', [OrangtuaController::class, 'daftar_anak'])->name('dashboard.orangtua.anak');
+
+    // Perkembangan anak
+    Route::get('/dashboard/orangtua/perkembangan', [OrangtuaController::class, 'perkembangan'])->name('dashboard.orangtua.perkembangan');
+
+    // Imunisasi anak
+    Route::get('/dashboard/orangtua/imunisasi', [OrangtuaController::class, 'imunisasi'])->name('dashboard.orangtua.imunisasi');
+
+    // Jadwal
+    Route::get('/dashboard/orangtua/jadwal', [JadwalPosyanduController::class, 'indexOrangtua'])->name('dashboard.orangtua.jadwal');
+
+    // Logout orangtua
+    Route::post('/logout-orangtua', [LoginController::class, 'logoutOrangtua'])->name('logout.orangtua');
+});
+

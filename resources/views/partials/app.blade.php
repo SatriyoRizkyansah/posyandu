@@ -8,14 +8,13 @@
   <title>Posyandu Mawar Indah IX</title>
 
   {{-- Logo --}}
-    <link rel="icon" href="{{ asset('images/logo/logo.jpg') }}" type="image/png"> 
+    <link rel="icon" href="{{ asset('images/logo/logo.png') }}" type="image/png"> 
 
   <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
-
-    <!-- endinject -->
+  <!-- endinject -->
     
     <!-- Plugin css for this page -->
     @yield('head')
@@ -63,11 +62,30 @@
         </div>
       </div>
 
-      <!-- partial -->
-      @include('partials.sidebar')
-      <!-- partial -->
+
+    <!-- partial -->
+    @if (Auth::guard('orangtua')->check())
+        @include('partials.sidebar-orangtua')
+    @else
+        @include('partials.sidebar')
+    @endif
+    <!-- partial -->
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const alertCloseButtons = document.querySelectorAll('.alert .close');
+          alertCloseButtons.forEach(button => {
+            button.addEventListener('click', function () {
+              const alert = this.parentElement;
+              alert.classList.remove('show');
+              setTimeout(() => alert.remove(), 300); // Remove the alert after fade-out
+            });
+          });
+        });
+      </script>
+
       <div class="main-panel">
-        
         
         {{-- Alert sukses --}}
         @if (session('success'))
@@ -90,19 +108,6 @@
         @endif
             
         @yield('content')
-        
-        
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        {{-- <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
-          </div>
-        </footer>  --}}
         <!-- partial -->
       </div>
       <!-- main-panel ends -->

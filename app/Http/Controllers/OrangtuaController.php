@@ -15,6 +15,26 @@ class OrangtuaController extends Controller
         ]);
     }
 
+    // Daftar Anak
+    public function daftar_anak()
+    {
+        return view('dashboard.orangtua.daftar_anak', [
+            'orangtua_data' => Orangtua::with('anak')->get(),
+        ]);
+    }
+
+    // perkembangan
+
+    public function perkembangan()
+    {
+        return view('dashboard.orangtua.perkembangan');
+    }
+
+    public function imunisasi()
+    {
+        return view('dashboard.orangtua.imunisasi');
+    }
+
     public function create()
     {
         return view('dashboard.admin.orangtua.pendaftaran_baru');
@@ -24,7 +44,6 @@ class OrangtuaController extends Controller
     {
         $request->validate([
             'nik' => 'required',
-            // 'nik' => 'required|unique:orangtua,nik',
             'nama_ibu' => 'required',
             'no_telp_ibu' => 'required',
             'alamat' => 'required',
@@ -42,9 +61,10 @@ class OrangtuaController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        // Generate ID anak unik 
-        $uniqueId = 'A' . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
-
+        // Generate ID anak unik
+        do {
+            $uniqueId = 'A' . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        } while (Anak::where('id', $uniqueId)->exists());
 
         // Simpan data anak
         Anak::create([

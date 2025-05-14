@@ -7,7 +7,7 @@
             <h4 class="card-title">Tambah data petugas</h4>
             {{-- <p class="card-description">Upload jadwal posyandu disini</p> --}}
             <form class="forms-sample" action="{{ route('petugas.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+              @csrf
              <div class="form-group">
                 <label for="exampleInputName1">Username</label>
                   <input type="text" class="form-control" id="username" placeholder="Username" name="username" />
@@ -21,8 +21,6 @@
           </div>
         </div>
       </div>
-
-      
 </div>
 
 @endsection

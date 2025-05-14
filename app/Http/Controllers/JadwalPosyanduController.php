@@ -14,7 +14,14 @@ class JadwalPosyanduController extends Controller
         $jadwal = JadwalPosyandu::latest()->first();
         // dd($jadwal);
         return view('dashboard.admin.jadwal.index', compact('jadwal'));
+    }
 
+    public function indexOrangtua()
+    {
+        // Get all records
+        $jadwal = JadwalPosyandu::latest()->first();
+        // dd($jadwal);
+        return view('dashboard.orangtua.jadwal', compact('jadwal'));
     }
 
     public function create()
