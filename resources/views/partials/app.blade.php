@@ -112,7 +112,5 @@
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
   <script src="../../js/settings.js"></script>
 </body>
-
-
 </html>
 
