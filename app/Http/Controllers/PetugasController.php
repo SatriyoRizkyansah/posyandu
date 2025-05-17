@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Petugas;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class PetugasController extends Controller
 {
@@ -14,13 +16,16 @@ class PetugasController extends Controller
         return view('dashboard.admin.petugas.index', compact('petugas'));
     }
 
+    // Controller
     public function print()
     {
+        // Ambil data petugas
         $petugas = Petugas::all();
-        $pdf = Pdf::loadView('dashboard.admin.petugas.print', compact('petugas'));
-        return $pdf->stream('data_petugas.pdf');
+        
+        // Return view HTML biasa
+        return view('dashboard.admin.petugas.print', compact('petugas'));
     }
-
+    
     public function create()
     {
         return view('dashboard.admin.petugas.create');

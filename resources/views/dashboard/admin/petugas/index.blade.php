@@ -34,12 +34,13 @@
 
 @section('content')
 
+
 <div class="content-wrapper" style="background-color: #CDE6B4">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Data Petugas</h4>          
-          <a href="{{ route('petugas.cetak') }}" class="btn btn-success btn-sm" target="_blank">Cetak</a>
+          <button onclick="captureTable()" class="btn btn-success btn-sm">Cetak</button>
           <a href="{{ route('petugas.create') }}" class="btn btn-success btn-sm">+ tambah</a>
           <div class="table-responsive pt-3">
             <table class="table table-bordered">
@@ -92,4 +93,24 @@
       </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+  function captureTable() {
+    const table = document.querySelector('.table-responsive'); // atau pilih elemen .card-body jika ingin semua
+
+    html2canvas(table).then(function(canvas) {
+      const link = document.createElement('a');
+      link.download = 'data_petugas.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  }
+</script>
+
+
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\PerkembanganAnakController;
 use App\Http\Controllers\PetugasController;
 use App\Models\Orangtua;
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
         //  Manage data petugas
         Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index');
-        Route::get('/petugas/print', [PetugasController::class, 'print'])->name('petugas.cetak');
+        // Route::get('/petugas/print', [PetugasController::class, 'print'])->name('petugas.cetak');
         Route::get('/petugas/create', [PetugasController::class, 'create'])->name('petugas.create');
         Route::post('/petugas/create', [PetugasController::class, 'store'])->name('petugas.store');
         Route::delete('/petugas/delete/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
