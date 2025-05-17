@@ -41,11 +41,8 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Data Perkembangan Anak</h4>
-                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
 
-                    {{-- <a href="{{ route('perkembangan.create') }}" class="btn btn-success btn-sm mb-4">
-                        Tambah
-                    </a> --}}
+                    <button onclick="captureTable()" class="btn btn-success btn-sm hide-on-capture mb-3">Cetak</button>
 
                     <div class="table-responsive">
                       <table class="table" id="myTable">
@@ -63,7 +60,7 @@
                                     <tr>
                                         <td>{{ $anak->id }}</td>
                                         <td>{{ $anak->nama }}</td>
-                                        <td>{{ $anak->tanggal_lahir }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F, Y') }}</td>
                                         <td>{{ $anak->tempat_lahir }}</td>
                                         <td>{{ $anak->jenis_kelamin }}</td>
                                     </tr>
@@ -83,9 +80,32 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable();
         });
+    </script>
+
+    <script>
+      function captureTable() {
+        const table = document.querySelector('.card-body');
+        const hiddenEls = document.querySelectorAll('.hide-on-capture');
+
+        // Sembunyikan kolom "Action"
+        hiddenEls.forEach(el => el.style.display = 'none');
+
+        // Screenshot
+        html2canvas(table).then(function(canvas) {
+          const link = document.createElement('a');
+          link.download = 'data_petugas.png';
+          link.href = canvas.toDataURL();
+          link.click();
+
+          // Tampilkan kembali kolom "Action"
+          hiddenEls.forEach(el => el.style.display = '');
+        });
+      }
     </script>
 @endsection

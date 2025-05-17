@@ -79,7 +79,10 @@
                 <img src="{{ asset('images/logo/logo.png') }}" alt="logo">
               </div>
               <h3 class="text-center font-weight-bold ">Posyandu<br>Mawar Indah IX</h3>
-              <h6 class="font-weight-light text-center my-4">Silakan masuk menggunakan akun Anda</h6>
+              <h6 class="font-weight-light text-center my-4">
+                Login untuk Orang Tua. Gunakan akun yang telah didaftarkan.
+              </h6>
+              
 
               <form method="POST" class="pt-3">
                 @csrf
@@ -94,6 +97,9 @@
                   <button class="btn btn-block btn-lg font-weight-medium auth-form-btn text-white">Masuk</button>
                 </div>
               </form>
+              <div class="text-center mt-4 font-weight-light">
+                Login disini sebagai <a href="/login"><span class="font-weight-bold">Admin</span></a>
+              </div>
             </div>
 
           </div>

@@ -40,8 +40,8 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Data Petugas</h4>          
-          <button onclick="captureTable()" class="btn btn-success btn-sm">Cetak</button>
-          <a href="{{ route('petugas.create') }}" class="btn btn-success btn-sm">+ tambah</a>
+          <button onclick="captureTable()" class="btn btn-success btn-sm hide-on-capture">Cetak</button>
+          <a href="{{ route('petugas.create') }}" class="btn btn-success btn-sm hide-on-capture">+ tambah</a>
           <div class="table-responsive pt-3">
             <table class="table table-bordered">
               <thead>
@@ -55,7 +55,7 @@
                   <th>
                     Password
                   </th>
-                  <th>
+                  <th class="hide-on-capture">
                     Action
                   </th>
                 </tr>
@@ -70,7 +70,7 @@
                         {{-- <td>{{ $p->password ? decrypt($p->password) : '' }}</td> --}}
                         <td>{{ $p->username }}</td>
                         <td>{{ $p->password }}</td>
-                        <td>
+                        <td class="hide-on-capture">
                             <form action="{{ route('petugas.destroy', $p->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -101,16 +101,25 @@
 
 <script>
   function captureTable() {
-    const table = document.querySelector('.table-responsive'); // atau pilih elemen .card-body jika ingin semua
+    const table = document.querySelector('.card-body');
+    const hiddenEls = document.querySelectorAll('.hide-on-capture');
 
+    // Sembunyikan kolom "Action"
+    hiddenEls.forEach(el => el.style.display = 'none');
+
+    // Screenshot
     html2canvas(table).then(function(canvas) {
       const link = document.createElement('a');
       link.download = 'data_petugas.png';
       link.href = canvas.toDataURL();
       link.click();
+
+      // Tampilkan kembali kolom "Action"
+      hiddenEls.forEach(el => el.style.display = '');
     });
   }
 </script>
+
 
 
 @endsection

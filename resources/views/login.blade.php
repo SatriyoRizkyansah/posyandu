@@ -79,7 +79,10 @@
                 <img src="{{ asset('images/logo/logo.png') }}" alt="logo">
               </div>
               <h3 class="text-center font-weight-bold ">Posyandu<br>Mawar Indah IX</h3>
-              <h6 class="font-weight-light text-center my-4">Silakan masuk menggunakan akun Anda</h6>
+              <h6 class="font-weight-light text-center my-4">
+                Halaman login untuk Admin. Silakan masuk untuk mengelola data Posyandu.
+              </h6>
+              
 
               <form method="POST" class="pt-3">
                 @csrf
