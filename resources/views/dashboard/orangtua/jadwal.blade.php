@@ -11,7 +11,7 @@
                 @else
                 <div>Belum ada jadwal yang di upload</div>
                 @endif
-            </div>
+            </div>  
         </div>
       </div>
 </div>
@@ -23,4 +23,5 @@
     textInput.value = fileInput.files[0]?.name || '';
   }
 </script>
+
 @endsection

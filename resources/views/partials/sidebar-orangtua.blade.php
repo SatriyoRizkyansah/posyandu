@@ -18,26 +18,26 @@
         </li>
         <li class="nav-item {{ request()->routeIs('dashboard.orangtua.anak') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.orangtua.anak') }}">
-                <i class="icon-grid menu-icon"></i>
+                <i class="bi bi-gender-ambiguous mr-3"></i>
                 <span class="menu-title">Daftar Anak</span>
             </a>
         </li>
         <li class="nav-item {{ request()->routeIs('dashboard.orangtua.perkembangan') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.orangtua.perkembangan') }}">
-                <i class="icon-grid menu-icon"></i>
+                <i class="bi bi-diagram-3 mr-3"></i>
                 <span class="menu-title">Perkembangan</span>
             </a>
         </li>
               <li class="nav-item {{ request()->routeIs('dashboard.orangtua.imunisasi') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.orangtua.imunisasi') }}">
-                <i class="icon-grid menu-icon"></i>
+                <i class="bi bi-vinyl mr-3"></i>
                 <span class="menu-title">Imunisasi</span>
             </a>
         </li>
          </li>
               <li class="nav-item {{ request()->routeIs('dashboard.orangtua.jadwal') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.orangtua.jadwal') }}">
-                <i class="icon-grid menu-icon"></i>
+                <i class="bi bi-calendar mr-3"></i>
                 <span class="menu-title">Jadwal</span>
             </a>
         </li>
@@ -45,7 +45,7 @@
             <form action="/logout-orangtua" method="post">
                 @csrf
                 <button class="nav-link" type="submit" style="border: none; background: none; padding: 4;">
-                    <i class="icon-grid menu-icon"></i>
+                    <i class="bi bi-arrow-left-square mr-3"></i>
                     <span class="menu-title">Logout</span>
                 </button>
             </form>

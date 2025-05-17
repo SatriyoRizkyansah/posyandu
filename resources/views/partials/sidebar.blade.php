@@ -18,19 +18,19 @@
         </li>
         <li class="nav-item {{ request()->routeIs('pendaftaran.create') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('pendaftaran.create') }}">
-                <i class="icon-grid menu-icon"></i>
+                <i class="icon-grid bi-person-plus mr-3"></i>
                 <span class="menu-title">Pendaftaran Baru</span>
             </a>
         </li>
         <li class="nav-item {{ request()->routeIs('jadwal.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('jadwal.index') }}">
-                <i class="icon-grid menu-icon"></i>
+                <i class="bi bi-calendar mr-3"></i>
                 <span class="menu-title">Jadwal</span>
             </a>
         </li>
         <li class="nav-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('petugas.index') }}">
-                <i class="icon-grid menu-icon"></i>
+                <i class="bi bi-person-video2 mr-3"></i>
                 <span class="menu-title">Petugas</span>
             </a>
         </li>
@@ -38,7 +38,7 @@
             <form action="/logout" method="post">
                 @csrf
                 <button class="nav-link" type="submit" style="border: none; background: none; padding: 4;">
-                    <i class="icon-grid menu-icon"></i>
+                    <i class="bi bi-arrow-left-square mr-3"></i>
                     <span class="menu-title">Logout</span>
                 </button>
             </form>
