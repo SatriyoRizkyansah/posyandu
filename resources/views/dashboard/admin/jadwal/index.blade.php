@@ -48,4 +48,11 @@
     textInput.value = fileInput.files[0]?.name || '';
   }
 </script>
+
+@endsection
+
+@section('script')
+    <!-- plugins:js -->
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <script src="../../js/settings.js"></script>
 @endsection
