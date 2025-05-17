@@ -64,7 +64,7 @@
                                 <td>{{ $anak->id }}</td>
                                 <td>{{ $anak->orangtua->nama_ibu }}</td>
                                 <td>{{ $anak->nama }}</td>
-                                <td>{{ $anak->tanggal_lahir }}</td>
+                                <td>{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F, Y') }}</td>
 
                                 @php
                                     $tanggalLahir = Carbon::parse($anak->tanggal_lahir);

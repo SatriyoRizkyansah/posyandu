@@ -64,7 +64,7 @@
                                 @foreach ($anak->perkembangan as $perkembangan)
                                     <tr>
                                         <td>{{ $anak->nama }}</td>
-                                        <td>{{ $perkembangan->tanggal_posyandu }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($perkembangan->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
                                         <td>{{ $perkembangan->berat_badan }} KG</td>
                                         <td>{{ $perkembangan->ket_bb }}</td>
                                         <td>{{ $perkembangan->tinggi_badan }} CM</td>

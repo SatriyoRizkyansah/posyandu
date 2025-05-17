@@ -64,7 +64,7 @@
                             @foreach ($immunisasi_data as $imunisasi)
                             <tr>
                                 <td>{{ $imunisasi->anak->nama }}</td>
-                                <td>{{ $imunisasi->tanggal_imunisasi }}</td>
+                                <td>{{ \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi)->translatedFormat('d F, Y') }}</td>
                                 <td>{{ $imunisasi->imunisasi }}</td>
                                 <td>{{ $imunisasi->vitamin }}</td>
                                 <td>
