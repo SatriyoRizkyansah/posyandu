@@ -36,21 +36,72 @@
     </style>
 @endsection
 @section('content')
-
-
 <div class="content-wrapper" style="background-color: #CDE6B4">
-  <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
+  <div class="col-lg-12 stretch-card">
+      <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Data Imunisasi Anak</h4>
-                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+                    <h4 class="card-title">Data Perkembangan Anak</h4>
 
-                    <a href="{{ route('imunisasi.create') }}" class="btn btn-success btn-sm mb-4">
+                    {{-- <a href="{{ route('perkembangan.create') }}" class="btn btn-success btn-sm mb-4">
                         Tambah
-                    </a>
+                    </a> --}}
 
                     <div class="table-responsive">
                       <table class="table" id="myTable">
+                        <thead>
+                          <tr>
+                            <th>Nama Anak</th>
+                            <th>Tanggal Posyandu</th>
+                            <th>Berat Badan</th>
+                            <th>Ket BB</th>
+                            <th>Tinggi Badan</th>
+                            <th>Ket TB</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($perkembanganAnak as $perkembangan)
+                            <tr>
+                                <td>{{ $perkembangan->anak->nama }}</td>
+                                <td>{{ \Carbon\Carbon::parse($perkembangan->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
+                                <td>{{ $perkembangan->berat_badan }} KG</td>
+                                <td>{{ $perkembangan->ket_bb }}</td>
+                                <td>{{ $perkembangan->tinggi_badan }} CM</td>
+                                <td>{{ $perkembangan->ket_tb }}</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ route('perkembangan.edit', $perkembangan->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                                         
+                                        <form action="{{ route('perkembangan.destroy', $perkembangan->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+      </div>
+  </div>
+</div>
+
+<div class="content-wrapper" style="background-color: #CDE6B4">
+  <div class="col-lg-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+                    <h4 class="card-title">Data Imunisasi Anak</h4>
+                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+
+                    {{-- <a href="{{ route('imunisasi.create') }}" class="btn btn-success btn-sm mb-4">
+                        Tambah
+                    </a> --}}
+
+                    <div class="table-responsive">
+                      <table class="table" id="myTable2">
                         <thead>
                           <tr>
                             <th>Nama Anak</th>
@@ -61,7 +112,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($immunisasi_data as $imunisasi)
+                            @foreach ($imunisasiAnak as $imunisasi)
                             <tr>
                                 <td>{{ $imunisasi->anak->nama }}</td>
                                 <td>{{ \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi)->translatedFormat('d F, Y') }}</td>
@@ -83,10 +134,11 @@
                         </tbody>
                       </table>
                     </div>
-                  </div>
-                </div>
-              </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 @endsection
 
@@ -99,4 +151,10 @@
             $('#myTable').DataTable();
         });
     </script>
+
+<script>
+  $(document).ready(function () {
+      $('#myTable2').DataTable();
+  });
+</script>
 @endsection

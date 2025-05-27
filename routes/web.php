@@ -22,7 +22,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('auth');
 Route::get('/login-orangtua', [LoginController::class, 'formOrangtua'])->middleware('guest')->name('login.orangtua');
 Route::post('/login-orangtua', [LoginController::class, 'authOrangtua'])->name('auth.orangtua');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     // Dashboard admin
     Route::prefix('dashboard/admin')->group(function () {
         Route::get('/home', [LoginController::class, 'dashboard'])->name('dashboard.admin.home');
@@ -77,13 +77,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/anak/edit/{id}', [AnakController::class, 'edit'])->name('anak.edit');
         Route::post('/anak/edit/{id}', [AnakController::class, 'update'])->name('anak.edit');
         Route::delete('/anak/delete/{id}', [AnakController::class, 'delete'])->name('anak.destroy');
+
+        // detail perkembangan & imunisasi anak
+        Route::get('/anak/tumbuh/{id}', [AnakController::class, 'showTumbuhAnak'])->name('anak.tumbuh');
         
     });
     //  logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-Route::middleware('orangtua')->group(function () {
+Route::middleware('auth:orangtua')->group(function () {
     Route::get('/dashboard/orangtua/home', [LoginController::class, 'dashboard_orangtua'])->name('dashboard.orangtua.home');
 
     // Perkembangan anak

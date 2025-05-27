@@ -84,6 +84,8 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
+
+                                        <a href="{{ route('anak.tumbuh', $anak->id) }}" class="btn btn-info btn-sm ml-2">Detail</a>
                                     </div>
                                 </td>
                             </tr>

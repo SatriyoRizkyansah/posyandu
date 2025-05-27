@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anak;
+use App\Models\Imunisasi;
 use App\Models\Orangtua;
+use App\Models\PerkembanganAnak;
 use Illuminate\Http\Request;
 
 class AnakController extends Controller
@@ -13,6 +15,15 @@ class AnakController extends Controller
         return view('dashboard.admin.anak.index', [
             'anak_data' => Anak::with('orangtua')->get(),
         ]);
+    }
+
+    public function showTumbuhAnak($id)
+    {
+        $perkembanganAnak = PerkembanganAnak::where('id_anak', $id)->get();
+
+        $imunisasiAnak = Imunisasi::where('id_anak', $id)->get();
+
+        return view('dashboard.admin.anak.detail-tumbuh-anak', compact('perkembanganAnak', 'imunisasiAnak'));
     }
 
     public function show($id)

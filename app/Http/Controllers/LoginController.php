@@ -29,20 +29,28 @@ class LoginController extends Controller
 
         $petugas = Petugas::where('username', $credentials['username'])->first();
 
-        if ($petugas) {
-            $inputPassword = $credentials['password'];
-            $storedPassword = $petugas->password;
+        // if ($petugas) {
+        //     $inputPassword = $credentials['password'];
+        //     $storedPassword = $petugas->password;
 
-            // Cek apakah password tersimpan dalam bentuk hash (bcrypt)
-            if (
-                (Hash::needsRehash($storedPassword) || Hash::check($inputPassword, $storedPassword)) ||
-                $inputPassword === $storedPassword // plain text match
-            ) {
-                Auth::login($petugas);
-                $request->session()->regenerate();
+        //     // Cek apakah password tersimpan dalam bentuk hash (bcrypt)
+        //     if (
+        //         (Hash::needsRehash($storedPassword) || Hash::check($inputPassword, $storedPassword)) ||
+        //         $inputPassword === $storedPassword // plain text match
+        //     ) {
+        //         Auth::guard('web')->login($petugas);
+        //         $request->session()->regenerate();
 
-                return redirect()->intended(route('dashboard.admin.home'))->with('success', 'Login Berhasil.');
-            }
+        //         return redirect()->intended(route('dashboard.admin.home'))->with('success', 'Login Berhasil.');
+        //     }
+        // }
+
+        if ($petugas && $petugas->password === $credentials['password']) {
+            // Login menggunakan guard orangtua
+            Auth::guard('web')->login($petugas);
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('dashboard.admin.home'))->with('success', 'Login Berhasil.');
         }
 
         return back()->with('loginError', 'Login gagal, username / password salah!');
@@ -51,7 +59,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout(); 
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate(); 
         $request->session()->regenerateToken(); 

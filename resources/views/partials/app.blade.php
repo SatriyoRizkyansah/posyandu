@@ -31,6 +31,8 @@
 
     {{-- Bootstrap icon --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    
     
 
 </head>
@@ -63,6 +65,7 @@
     @endif
     <!-- partial -->
 
+    {{-- @include('partials.sidebar') --}}
 
       <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -111,6 +114,28 @@
   @yield('script')
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
   <script src="../../js/settings.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.querySelector('[data-toggle="offcanvas"]');
+      const sidebar = document.getElementById('sidebar');
+  
+      if (toggle && sidebar) {
+        toggle.addEventListener('click', function () {
+          sidebar.classList.toggle('active');
+        });
+      }
+    });
+  </script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+  
 </body>
 </html>
 

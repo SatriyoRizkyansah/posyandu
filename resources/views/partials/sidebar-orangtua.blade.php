@@ -1,5 +1,5 @@
 
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
     <style>
         .nav .nav-item.active > .nav-link {
             background-color: #A0C97A !important;
@@ -48,6 +48,12 @@
             </a>
           </li>
     </ul>
+
+    
+
+
+
+
 </nav>
 
 <!-- Logout Modal -->
@@ -73,3 +79,16 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.querySelector('[data-toggle="offcanvas"]');
+      const sidebar = document.getElementById('sidebar');
+  
+      if (toggle && sidebar) {
+        toggle.addEventListener('click', function () {
+          sidebar.classList.toggle('active');
+        });
+      }
+    });
+  </script>

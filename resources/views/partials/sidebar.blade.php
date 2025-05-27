@@ -7,41 +7,85 @@
         background-color: #A0C97A !important;
       }
     </style>
-    <ul class="nav">
-      <li class="nav-item {{ request()->routeIs('dashboard.admin.home') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('dashboard.admin.home') }}">
-          <i class="icon-grid menu-icon"></i>
-          <span class="menu-title">Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item {{ request()->routeIs('pendaftaran.create') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('pendaftaran.create') }}">
-          <i class="icon-grid bi-person-plus mr-3"></i>
-          <span class="menu-title">Pendaftaran Baru</span>
-        </a>
-      </li>
-      <li class="nav-item {{ request()->routeIs('jadwal.index') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('jadwal.index') }}">
-          <i class="bi bi-calendar mr-3"></i>
-          <span class="menu-title">Jadwal</span>
-        </a>
-      </li>
-      <li class="nav-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('petugas.index') }}">
-          <i class="bi bi-person-video2 mr-3"></i>
-          <span class="menu-title">Petugas</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-          <i class="bi bi-arrow-left-square mr-3"></i>
-          <span class="menu-title">Logout</span>
-        </a>
-      </li>
-    </ul>
+    
+
+    {{-- @if (Auth::guard('orangtua')->check())
+      <ul class="nav">
+        <li class="nav-item {{ request()->routeIs('dashboard.orangtua.home') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.orangtua.home') }}">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('dashboard.orangtua.anak') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.orangtua.anak') }}">
+                <i class="bi bi-gender-ambiguous mr-3"></i>
+                <span class="menu-title">Daftar Anak</span>
+            </a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('dashboard.orangtua.perkembangan') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.orangtua.perkembangan') }}">
+                <i class="bi bi-diagram-3 mr-3"></i>
+                <span class="menu-title">Perkembangan</span>
+            </a>
+        </li>
+              <li class="nav-item {{ request()->routeIs('dashboard.orangtua.imunisasi') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.orangtua.imunisasi') }}">
+                <i class="bi bi-vinyl mr-3"></i>
+                <span class="menu-title">Imunisasi</span>
+            </a>
+        </li>
+        </li>
+              <li class="nav-item {{ request()->routeIs('dashboard.orangtua.jadwal') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.orangtua.jadwal') }}">
+                <i class="bi bi-calendar mr-3"></i>
+                <span class="menu-title">Jadwal</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="bi bi-arrow-left-square mr-3"></i>
+              <span class="menu-title">Logout</span>
+            </a>
+          </li>
+      </ul> --}}
+    {{-- @elseif (Auth::guard('web')->check()) --}}
+      <ul class="nav">
+        <li class="nav-item {{ request()->routeIs('dashboard.admin.home') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('dashboard.admin.home') }}">
+            <i class="icon-grid menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('pendaftaran.create') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('pendaftaran.create') }}">
+            <i class="icon-grid bi-person-plus mr-3"></i>
+            <span class="menu-title">Pendaftaran Baru</span>
+          </a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('jadwal.index') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('jadwal.index') }}">
+            <i class="bi bi-calendar mr-3"></i>
+            <span class="menu-title">Jadwal</span>
+          </a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('petugas.index') }}">
+            <i class="bi bi-person-video2 mr-3"></i>
+            <span class="menu-title">Petugas</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+            <i class="bi bi-arrow-left-square mr-3"></i>
+            <span class="menu-title">Logout</span>
+          </a>
+        </li>
+      </ul>
+    {{-- @endif --}}
   </nav>
   
-  <!-- Logout Modal -->
+  <!-- Logout Modal Petugas -->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -64,3 +108,5 @@
       </div>
     </div>
   </div>
+
+  
