@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anak;
+use App\Models\Imunisasi;
 use App\Models\Orangtua;
+use App\Models\PerkembanganAnak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrangtuaController extends Controller
 {
@@ -24,15 +27,27 @@ class OrangtuaController extends Controller
     }
 
     // perkembangan
-
     public function perkembangan()
     {
         return view('dashboard.orangtua.perkembangan');
     }
 
+    public function perkembangan_detail($id)
+    {
+
+        $perkembanganAnak = PerkembanganAnak::with('anak')->where('id_anak', $id)->get();
+        return view('dashboard.orangtua.perkembangan-detail', compact('perkembanganAnak'));
+    }
+
     public function imunisasi()
     {
         return view('dashboard.orangtua.imunisasi');
+    }
+
+    public function imunisasi_detail($id)
+    {
+        $immunisasi_data = Imunisasi::with('anak')->where('id_anak', $id)->get();
+        return view('dashboard.orangtua.imunisasi-detail', compact('immunisasi_data'));
     }
 
     public function create()

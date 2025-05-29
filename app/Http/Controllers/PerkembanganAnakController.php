@@ -10,7 +10,16 @@ class PerkembanganAnakController extends Controller
 {
     public function index()
     {
-        $perkembanganAnak = PerkembanganAnak::with('anak')->get();
+        $perkembanganAnak = PerkembanganAnak::with('anak')
+            ->whereIn('id', function($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('perkembangan_anak')
+                    ->groupBy('id_anak');
+            })
+            ->orderByDesc('tanggal_posyandu')
+            ->get();
+        
+        // dd($perkembanganAnak);
         return view('dashboard.admin.perkembangan_anak.index', compact('perkembanganAnak'));
     }
 

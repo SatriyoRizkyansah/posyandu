@@ -42,16 +42,13 @@
                   <div class="card-body">
                     <h4 class="card-title">Data Perkembangan Anak</h4>
 
-                    {{-- <a href="{{ route('perkembangan.create') }}" class="btn btn-success btn-sm mb-4">
-                        Tambah
-                    </a> --}}
-
                     <div class="table-responsive">
                       <table class="table" id="myTable">
                         <thead>
                           <tr>
                             <th>Nama Anak</th>
                             <th>Tanggal Posyandu</th>
+                            <th>Umur</th>
                             <th>Berat Badan</th>
                             <th>Ket BB</th>
                             <th>Tinggi Badan</th>
@@ -64,6 +61,14 @@
                             <tr>
                                 <td>{{ $perkembangan->anak->nama }}</td>
                                 <td>{{ \Carbon\Carbon::parse($perkembangan->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
+                                <td>
+                                  @php
+                                    $tanggalLahir = \Carbon\Carbon::parse($perkembangan->anak->tanggal_lahir);
+                                    $tanggalPosyandu = \Carbon\Carbon::parse($perkembangan->tanggal_posyandu);
+                                    $umur = $tanggalLahir->diff($tanggalPosyandu);
+                                  @endphp
+                                  {{ $umur->y }} tahun {{ $umur->m }} bulan {{ $umur->d }} hari
+                                </td>
                                 <td>{{ $perkembangan->berat_badan }} KG</td>
                                 <td>{{ $perkembangan->ket_bb }}</td>
                                 <td>{{ $perkembangan->tinggi_badan }} CM</td>
@@ -106,6 +111,7 @@
                           <tr>
                             <th>Nama Anak</th>
                             <th>Tanggal Imunisasi</th>
+                            <th>Umur</th>
                             <th>Imunisasi</th>
                             <th>Vitamin</th>
                             <th>Action</th>
@@ -116,6 +122,14 @@
                             <tr>
                                 <td>{{ $imunisasi->anak->nama }}</td>
                                 <td>{{ \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi)->translatedFormat('d F, Y') }}</td>
+                                <td>
+                                  @php
+                                    $tanggalLahir = \Carbon\Carbon::parse($imunisasi->anak->tanggal_lahir);
+                                    $tanggalImunisasi = \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi);
+                                    $umur = $tanggalLahir->diff($tanggalImunisasi);
+                                  @endphp
+                                  {{ $umur->y }} tahun {{ $umur->m }} bulan {{ $umur->d }} hari
+                                </td>
                                 <td>{{ $imunisasi->imunisasi }}</td>
                                 <td>{{ $imunisasi->vitamin }}</td>
                                 <td>

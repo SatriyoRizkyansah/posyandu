@@ -40,10 +40,10 @@
 
 <div class="content-wrapper" style="background-color: #CDE6B4">
   <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
+    <div class="card">
+      <div class="card-body">
                     <h4 class="card-title">Data Imunisasi Anak</h4>
-                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+                    <p class="card-description">Ini adalah data imunisasi anak yang telah didaftarkan, di tampilkan berdasarkan data yang terbaru tiap anak. </p>
 
                     <a href="{{ route('imunisasi.create') }}" class="btn btn-success btn-sm mb-4">
                         Tambah
@@ -55,6 +55,7 @@
                           <tr>
                             <th>Nama Anak</th>
                             <th>Tanggal Imunisasi</th>
+                            <th>Umur</th>
                             <th>Imunisasi</th>
                             <th>Vitamin</th>
                             <th>Action</th>
@@ -65,6 +66,14 @@
                             <tr>
                                 <td>{{ $imunisasi->anak->nama }}</td>
                                 <td>{{ \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi)->translatedFormat('d F, Y') }}</td>
+                                <td>
+                                  @php
+                                    $tanggalLahir = \Carbon\Carbon::parse($imunisasi->anak->tanggal_lahir);
+                                    $tanggalImunisasi = \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi);
+                                    $umur = $tanggalLahir->diff($tanggalImunisasi);
+                                  @endphp
+                                  {{ $umur->y }} tahun {{ $umur->m }} bulan {{ $umur->d }} hari
+                                </td>
                                 <td>{{ $imunisasi->imunisasi }}</td>
                                 <td>{{ $imunisasi->vitamin }}</td>
                                 <td>
@@ -77,7 +86,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
 
-                                        
+                                        <a href="{{ route('imunisasi.detail', $imunisasi->anak->id) }}" class="btn btn-info btn-sm ml-2">Detail</a>
                                     </div>
                                 </td>
                             </tr>
@@ -85,9 +94,9 @@
                         </tbody>
                       </table>
                     </div>
-                  </div>
-                </div>
-              </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection

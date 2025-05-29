@@ -53,6 +53,7 @@ Route::middleware('auth:web')->group(function () {
 
         // Manage data Imunisasi
         Route::get('/imunisasi', [ImunisasiController::class, 'index'])->name('imunisasi.index');
+        Route::get('/imunisasi/detail/{id}', [ImunisasiController::class, 'detail'])->name('imunisasi.detail');
         Route::get('/imunisasi/create', [ImunisasiController::class, 'create'])->name('imunisasi.create');
         Route::post('/imunisasi/create', [ImunisasiController::class, 'store'])->name('imunisasi.store');
         Route::get('/imunisasi/edit/{id}', [ImunisasiController::class, 'edit'])->name('imunisasi.edit');
@@ -90,14 +91,16 @@ Route::middleware('auth:web')->group(function () {
 Route::middleware('auth:orangtua')->group(function () {
     Route::get('/dashboard/orangtua/home', [LoginController::class, 'dashboard_orangtua'])->name('dashboard.orangtua.home');
 
-    // Perkembangan anak
+    // Daftar anak
     Route::get('/dashboard/orangtua/daftar_anak', [OrangtuaController::class, 'daftar_anak'])->name('dashboard.orangtua.anak');
 
     // Perkembangan anak
     Route::get('/dashboard/orangtua/perkembangan', [OrangtuaController::class, 'perkembangan'])->name('dashboard.orangtua.perkembangan');
+    Route::get('/dashboard/orangtua/perkembangan-detail/{id}', [OrangtuaController::class, 'perkembangan_detail'])->name('dashboard.orangtua.perkembangan-detail');
 
     // Imunisasi anak
     Route::get('/dashboard/orangtua/imunisasi', [OrangtuaController::class, 'imunisasi'])->name('dashboard.orangtua.imunisasi');
+    Route::get('/dashboard/orangtua/imunisasi-detail/{id}', [OrangtuaController::class, 'imunisasi_detail'])->name('dashboard.orangtua.imunisasi-detail');
 
     // Jadwal
     Route::get('/dashboard/orangtua/jadwal', [JadwalPosyanduController::class, 'indexOrangtua'])->name('dashboard.orangtua.jadwal');

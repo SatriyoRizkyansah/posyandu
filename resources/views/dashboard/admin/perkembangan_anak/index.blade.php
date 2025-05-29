@@ -41,7 +41,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Data Perkembangan Anak</h4>
-                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+                    <p class="card-description">Ini adalah data perkembangan anak yang telah didaftarkan, di tampilkan berdasarkan data yang terbaru tiap anak. </p>
 
                     <a href="{{ route('perkembangan.create') }}" class="btn btn-success btn-sm mb-4">
                         Tambah
@@ -53,6 +53,7 @@
                           <tr>
                             <th>Nama Anak</th>
                             <th>Tanggal Posyandu</th>
+                            <th>Umur</th>
                             <th>Berat Badan</th>
                             <th>Ket BB</th>
                             <th>Tinggi Badan</th>
@@ -65,6 +66,15 @@
                             <tr>
                                 <td>{{ $perkembangan->anak->nama }}</td>
                                 <td>{{ \Carbon\Carbon::parse($perkembangan->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
+                                <td>
+                                  @php
+                                    $tanggalLahir = \Carbon\Carbon::parse($perkembangan->anak->tanggal_lahir);
+                                    $tanggalImunisasi = \Carbon\Carbon::parse($perkembangan->tanggal_imunisasi);
+                                    $umur = $tanggalLahir->diff($tanggalImunisasi);
+                                  @endphp
+                                  {{ $umur->y }} tahun {{ $umur->m }} bulan {{ $umur->d }} hari
+                                </td>
+                                {{-- <td>{{ $perkembangan->anak->tanggal_lahir }}</td> --}}
                                 <td>{{ $perkembangan->berat_badan }} KG</td>
                                 <td>{{ $perkembangan->ket_bb }}</td>
                                 <td>{{ $perkembangan->tinggi_badan }} CM</td>

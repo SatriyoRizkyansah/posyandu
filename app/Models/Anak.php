@@ -36,4 +36,5 @@ class Anak extends Model
     {
         return $this->hasMany(PerkembanganAnak::class, 'id_anak');
     }
+    
 }

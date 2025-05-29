@@ -36,8 +36,13 @@
 @endsection
 @section('content')
 <div class="content-wrapper" style="background-color: #CDE6B4">
+  <div class="col-lg-12 ml-2">
+    
+    <h3 style="text-transform: capitalize">{{ $perkembanganAnak[0]->anak->nama }}</h3>
+    <h5 class="mb-3">ID {{ $perkembanganAnak[0]->anak->id }}</h5>
+  </div>
             <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
+              <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Data Perkembangan Anak</h4>
                     {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
@@ -52,6 +57,7 @@
                           <tr>
                             <th>Nama Anak</th>
                             <th>Tanggal Posyandu</th>
+                            <th>Umur</th>
                             <th>Berat Badan</th>
                             <th>Ket BB</th>
                             <th>Tinggi Badan</th>
@@ -60,10 +66,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @forelse ($perkembanganAnak as $perkembangan)
+                            @foreach ($perkembanganAnak as $perkembangan)
                             <tr>
                                 <td>{{ $perkembangan->anak->nama }}</td>
                                 <td>{{ \Carbon\Carbon::parse($perkembangan->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
+                                <td>
+                                  @php
+                                    $tanggalLahir = \Carbon\Carbon::parse($perkembangan->anak->tanggal_lahir);
+                                    $tanggalPosyandu = \Carbon\Carbon::parse($perkembangan->tanggal_posyandu);
+                                    $umur = $tanggalLahir->diff($tanggalPosyandu);
+                                  @endphp
+                                  {{ $umur->y }} tahun {{ $umur->m }} bulan {{ $umur->d }} hari
+                                </td>
                                 <td>{{ $perkembangan->berat_badan }} KG</td>
                                 <td>{{ $perkembangan->ket_bb }}</td>
                                 <td>{{ $perkembangan->tinggi_badan }} CM</td>

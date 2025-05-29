@@ -57,13 +57,13 @@
                         </thead>
                         <tbody>
                             @foreach (Auth::guard('orangtua')->user()->anak as $anak)
-                                    <tr>
-                                        <td>{{ $anak->id }}</td>
-                                        <td>{{ $anak->nama }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F, Y') }}</td>
-                                        <td>{{ $anak->tempat_lahir }}</td>
-                                        <td>{{ $anak->jenis_kelamin }}</td>
-                                    </tr>
+                              <tr>
+                                  <td>{{ $anak->id }}</td>
+                                  <td>{{ $anak->nama }}</td>
+                                  <td>{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F, Y') }}</td>
+                                  <td>{{ $anak->tempat_lahir }}</td>
+                                  <td>{{ $anak->jenis_kelamin }}</td>
+                              </tr>
                             @endforeach
                         </tbody>
                       </table>

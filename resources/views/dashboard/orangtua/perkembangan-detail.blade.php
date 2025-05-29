@@ -1,6 +1,3 @@
-@php
-    use Carbon\Carbon;
-@endphp
 @extends('partials.app')
 @section('head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
@@ -35,67 +32,51 @@
         background-color: #f1f1f1 !important;
         border-color: #ddd !important;
       }
-
     </style>
 @endsection
 @section('content')
-
-
 <div class="content-wrapper" style="background-color: #CDE6B4">
+  <div class="col-lg-12 ml-2">
+    
+    <h3 style="text-transform: capitalize">{{ $perkembanganAnak[0]->anak->nama }}</h3>
+    <h5 class="mb-3">ID {{ $perkembanganAnak[0]->anak->id }}</h5>
+  </div>
             <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
+              <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Data Anak</h4>
+                    <h4 class="card-title">Data Perkembangan Anak</h4>
+                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+
                     <div class="table-responsive">
                       <table class="table" id="myTable">
                         <thead>
                           <tr>
-                            <th>ID Terdaftar</th>
-                            <th>Nama Ibu</th>
                             <th>Nama Anak</th>
-                            <th>Tanggal Lahir</th>
+                            <th>Tanggal Posyandu</th>
                             <th>Umur</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Action</th>
+                            <th>Berat Badan</th>
+                            <th>Ket BB</th>
+                            <th>Tinggi Badan</th>
+                            <th>Ket TB</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($anak_data as $anak)
+                            @foreach ($perkembanganAnak as $perkembangan)
                             <tr>
-                                <td>{{ $anak->id }}</td>
-                                <td>{{ $anak->orangtua->nama_ibu }}</td>
-                                <td>{{ $anak->nama }}</td>
-                                <td>{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F, Y') }}</td>
-
-                                @php
-                                    $tanggalLahir = Carbon::parse($anak->tanggal_lahir);
-                                    $sekarang = Carbon::now();
-                                    $umurTahun = $tanggalLahir->diff($sekarang)->y;
-                                    $umurBulan = $tanggalLahir->diff($sekarang)->m;
-                                @endphp
-
-                                <td>{{ $umurTahun }} thn, {{ $umurBulan }} bln</td>
-                                <td class="text-center">
-                                  @if ($anak->jenis_kelamin === 'perempuan')
-                                    <span class="badge" style="background-color: #ff69b4; color: white;">Perempuan</span>
-                                  @else
-                                    <span class="badge" style="background-color: #007bff; color: white;">Laki-laki</span>
-                                  @endif
-                                </td>
-
+                                <td>{{ $perkembangan->anak->nama }}</td>
+                                <td>{{ \Carbon\Carbon::parse($perkembangan->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
                                 <td>
-                                    <div class="d-flex">
-                                        <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
-                                         
-                                        <form action="{{ route('anak.destroy', $anak->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                        </form>
-
-                                        <a href="{{ route('anak.tumbuh', $anak->id) }}" class="btn btn-info btn-sm ml-2">Detail</a>
-                                    </div>
+                                  @php
+                                    $tanggalLahir = \Carbon\Carbon::parse($perkembangan->anak->tanggal_lahir);
+                                    $tanggalPosyandu = \Carbon\Carbon::parse($perkembangan->tanggal_posyandu);
+                                    $umur = $tanggalLahir->diff($tanggalPosyandu);
+                                  @endphp
+                                  {{ $umur->y }} tahun {{ $umur->m }} bulan {{ $umur->d }} hari
                                 </td>
+                                <td>{{ $perkembangan->berat_badan }} KG</td>
+                                <td>{{ $perkembangan->ket_bb }}</td>
+                                <td>{{ $perkembangan->tinggi_badan }} CM</td>
+                                <td>{{ $perkembangan->ket_tb }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -106,14 +87,13 @@
               </div>
 </div>
 
+
 @endsection
 
 @section('script')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
-    
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable();

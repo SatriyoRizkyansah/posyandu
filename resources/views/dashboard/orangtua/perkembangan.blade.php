@@ -41,12 +41,6 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Data Perkembangan Anak</h4>
-                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
-
-                    {{-- <a href="{{ route('perkembangan.create') }}" class="btn btn-success btn-sm mb-4">
-                        Tambah
-                    </a> --}}
-
                     <div class="table-responsive">
                       <table class="table" id="myTable">
                         <thead>
@@ -57,21 +51,29 @@
                             <th>Ket BB</th>
                             <th>Tinggi Badan</th>
                             <th>Ket TB</th>
+                            <th>Detail</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach (Auth::guard('orangtua')->user()->anak as $anak)
-                                @foreach ($anak->perkembangan as $perkembangan)
-                                    <tr>
-                                        <td>{{ $anak->nama }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($perkembangan->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
-                                        <td>{{ $perkembangan->berat_badan }} KG</td>
-                                        <td>{{ $perkembangan->ket_bb }}</td>
-                                        <td>{{ $perkembangan->tinggi_badan }} CM</td>
-                                        <td>{{ $perkembangan->ket_tb }}</td>
-                                    </tr>
-                                @endforeach
-                            @endforeach
+                          @foreach (Auth::guard('orangtua')->user()->anak as $anak)
+                            @php
+                                $perkembanganTerbaru = $anak->perkembangan->sortByDesc('tanggal_posyandu')->first();
+                            @endphp
+                            @if ($perkembanganTerbaru)
+                                <tr>
+                                    <td>{{ $anak->nama }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($perkembanganTerbaru->tanggal_posyandu)->translatedFormat('d F, Y') }}</td>
+                                    <td>{{ $perkembanganTerbaru->berat_badan }} KG</td>
+                                    <td>{{ $perkembanganTerbaru->ket_bb }}</td>
+                                    <td>{{ $perkembanganTerbaru->tinggi_badan }} CM</td>
+                                    <td>{{ $perkembanganTerbaru->ket_tb }}</td>
+                                    <td>
+                                      <a href="{{ route('dashboard.orangtua.perkembangan-detail', $perkembanganTerbaru->id_anak) }}" class="btn btn-info btn-sm ml-2">Detail</a>
+                                    </td>
+                                </tr>
+                            @endif
+                          @endforeach
+
                         </tbody>
                       </table>
                     </div>

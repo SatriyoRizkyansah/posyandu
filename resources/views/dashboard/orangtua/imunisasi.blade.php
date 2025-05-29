@@ -53,18 +53,25 @@
                             <th>Tanggal Imunisasi</th>
                             <th>Imunisasi</th>
                             <th>Vitamin</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach (Auth::guard('orangtua')->user()->anak as $anak)
-                                @foreach ($anak->imunisasi as $imunisasi)
+                              @php
+                                $imunisasiTerbaru = $anak->imunisasi->sortByDesc('tanggal_imunisasi')->first();
+                              @endphp
+                              @if ($imunisasiTerbaru)
                                     <tr>
-                                        <td>{{ $imunisasi->anak->nama }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi)->translatedFormat('d F, Y') }}</td>
-                                        <td>{{ $imunisasi->imunisasi }}</td>
-                                        <td>{{ $imunisasi->vitamin }}</td>
+                                        <td>{{ $anak->nama }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($imunisasiTerbaru->tanggal_imunisasi)->translatedFormat('d F, Y') }}</td>
+                                        <td>{{ $imunisasiTerbaru->imunisasi }}</td>
+                                        <td>{{ $imunisasiTerbaru->vitamin }}</td>
+                                        <td>
+                                          <a href="{{ route('dashboard.orangtua.imunisasi-detail', $imunisasiTerbaru->id_anak) }}" class="btn btn-info btn-sm ml-2">Detail</a>
+                                        </td>
                                     </tr>
-                                @endforeach
+                              @endif
                             @endforeach
                         </tbody>
                       </table>

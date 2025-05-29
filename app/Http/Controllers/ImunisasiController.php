@@ -10,8 +10,25 @@ class ImunisasiController extends Controller
 {
     public function index()
     {
-        $immunisasi_data = Imunisasi::with('anak')->get();
+        // $immunisasi_data = Imunisasi::with('anak')->get();
+
+        $immunisasi_data = Imunisasi::with('anak')
+            ->whereIn('id', function($query) {
+                $query->selectRaw('MAX(id)')
+                    ->from('imunisasi')
+                    ->groupBy('id_anak');
+            })
+            ->orderByDesc('tanggal_imunisasi')
+            ->get();
+
         return view('dashboard.admin.imunisasi.index', compact('immunisasi_data'));
+    }
+
+    public function detail($id)
+    {
+
+        $immunisasi_data = Imunisasi::with('anak')->where('id_anak', $id)->get();
+        return view('dashboard.admin.imunisasi.detail', compact('immunisasi_data'));
     }
 
     public function create()

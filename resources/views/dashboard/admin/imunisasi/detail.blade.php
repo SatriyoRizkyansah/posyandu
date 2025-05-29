@@ -1,6 +1,3 @@
-@php
-    use Carbon\Carbon;
-@endphp
 @extends('partials.app')
 @section('head')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
@@ -42,58 +39,57 @@
 
 
 <div class="content-wrapper" style="background-color: #CDE6B4">
-            <div class="col-lg-12 grid-margin stretch-card">
+  <div class="col-lg-12 ml-2">
+    <h3 style="text-transform: capitalize">{{ $immunisasi_data[0]->anak->nama }}</h3>
+    <h5 class="mb-3">ID {{ $immunisasi_data[0]->anak->id }}</h5>
+  </div>
+  <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Data Anak</h4>
+                    <h4 class="card-title">Data Imunisasi Anak</h4>
+                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+
+                    <a href="{{ route('imunisasi.create') }}" class="btn btn-success btn-sm mb-4">
+                        Tambah
+                    </a>
+
                     <div class="table-responsive">
                       <table class="table" id="myTable">
                         <thead>
                           <tr>
-                            <th>ID Terdaftar</th>
-                            <th>Nama Ibu</th>
                             <th>Nama Anak</th>
-                            <th>Tanggal Lahir</th>
+                            <th>Tanggal Imunisasi</th>
                             <th>Umur</th>
-                            <th>Jenis Kelamin</th>
+                            <th>Imunisasi</th>
+                            <th>Vitamin</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($anak_data as $anak)
+                            @foreach ($immunisasi_data as $imunisasi)
                             <tr>
-                                <td>{{ $anak->id }}</td>
-                                <td>{{ $anak->orangtua->nama_ibu }}</td>
-                                <td>{{ $anak->nama }}</td>
-                                <td>{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F, Y') }}</td>
-
-                                @php
-                                    $tanggalLahir = Carbon::parse($anak->tanggal_lahir);
-                                    $sekarang = Carbon::now();
-                                    $umurTahun = $tanggalLahir->diff($sekarang)->y;
-                                    $umurBulan = $tanggalLahir->diff($sekarang)->m;
-                                @endphp
-
-                                <td>{{ $umurTahun }} thn, {{ $umurBulan }} bln</td>
-                                <td class="text-center">
-                                  @if ($anak->jenis_kelamin === 'perempuan')
-                                    <span class="badge" style="background-color: #ff69b4; color: white;">Perempuan</span>
-                                  @else
-                                    <span class="badge" style="background-color: #007bff; color: white;">Laki-laki</span>
-                                  @endif
+                                <td>{{ $imunisasi->anak->nama }}</td>
+                                <td>{{ \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi)->translatedFormat('d F, Y') }}</td>
+                                <td>
+                                  @php
+                                    $tanggalLahir = \Carbon\Carbon::parse($imunisasi->anak->tanggal_lahir);
+                                    $tanggalImunisasi = \Carbon\Carbon::parse($imunisasi->tanggal_imunisasi);
+                                    $umur = $tanggalLahir->diff($tanggalImunisasi);
+                                  @endphp
+                                  {{ $umur->y }} tahun {{ $umur->m }} bulan {{ $umur->d }} hari
                                 </td>
-
+                                <td>{{ $imunisasi->imunisasi }}</td>
+                                <td>{{ $imunisasi->vitamin }}</td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                                        <a href="{{ route('imunisasi.edit', $imunisasi->id) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
                                          
-                                        <form action="{{ route('anak.destroy', $anak->id) }}" method="POST">
+                                        <form action="{{ route('imunisasi.destroy', $imunisasi->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
-
-                                        <a href="{{ route('anak.tumbuh', $anak->id) }}" class="btn btn-info btn-sm ml-2">Detail</a>
+                                        
                                     </div>
                                 </td>
                             </tr>
@@ -112,8 +108,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
-    
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable();
