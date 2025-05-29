@@ -14,6 +14,13 @@ class PerkembanganAnakController extends Controller
         return view('dashboard.admin.perkembangan_anak.index', compact('perkembanganAnak'));
     }
 
+    public function detail($id)
+    {
+
+        $perkembanganAnak = PerkembanganAnak::with('anak')->where('id_anak', $id)->get();
+        return view('dashboard.admin.perkembangan_anak.detail', compact('perkembanganAnak'));
+    }
+
     public function create()
     {
         return view('dashboard.admin.perkembangan_anak.create');

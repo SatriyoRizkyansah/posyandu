@@ -44,6 +44,7 @@ Route::middleware('auth:web')->group(function () {
 
         // Manage data perkembangan anak
         Route::get('/perkembangan', [PerkembanganAnakController::class, 'index'])->name('perkembangan.index');
+        Route::get('/perkembangan/detail/{id}', [PerkembanganAnakController::class, 'detail'])->name('perkembangan.detail');
         Route::get('/perkembangan/create', [PerkembanganAnakController::class, 'create'])->name('perkembangan.create');
         Route::post('/perkembangan/create', [PerkembanganAnakController::class, 'store'])->name('perkembangan.store');
         Route::get('/perkembangan/edit/{id}', [PerkembanganAnakController::class, 'edit'])->name('perkembangan.edit');
