@@ -9,8 +9,11 @@
         <form class="forms-sample" action="{{ route('perkembangan.store') }}" method="POST">
           @csrf
           <div class="form-group">
-            <label for="exampleInputUsername1">ID Anak</label>
-            <input type="text" class="form-control" id="exampleInputUsername1" placeholder="ID Anak" name="id_anak" />
+            <label for="id_anak">ID Anak</label>
+            <input type="text" class="form-control" id="id_anak" placeholder="ID Anak" name="id_anak" value="{{ $anak ? $anak->id : '' }}" {{ $anak ? 'readonly' : '' }} />
+            @if($anak)
+            <small class="form-text text-success">ID Anak: {{ $anak->nama }}</small>
+            @endif
           </div>
           <div class="form-group">
             <label for="tanggal_posyandu">Tanggal Posyandu</label>

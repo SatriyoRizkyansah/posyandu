@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 Route::get('/', function () {
-    return redirect('/login');
-    // return view('welcome');
+    return view('welcome');
 });
+
+// Route::get('/home-view', function () {
+//     return view('welcome');
+// });
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('auth');

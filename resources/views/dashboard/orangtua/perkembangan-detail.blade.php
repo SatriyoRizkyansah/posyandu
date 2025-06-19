@@ -44,8 +44,12 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Data Perkembangan Anak</h4>
-                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="card-title mb-0">Data Perkembangan Anak</h4>
+                        <a href="{{ route('perkembangan.create', ['id_anak' => $perkembanganAnak[0]->anak->id]) }}" class="btn btn-success">
+                            <i class="ti-plus"></i> Tambah Data
+                        </a>
+                    </div>
 
                     <div class="table-responsive">
                       <table class="table" id="myTable">

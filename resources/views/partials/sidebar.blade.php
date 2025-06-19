@@ -69,12 +69,12 @@
             <span class="menu-title">Jadwal</span>
           </a>
         </li>
-        <li class="nav-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
+        {{-- <li class="nav-item {{ request()->routeIs('petugas.index') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('petugas.index') }}">
             <i class="bi bi-person-video2 mr-3"></i>
             <span class="menu-title">Petugas</span>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="bi bi-arrow-left-square mr-3"></i>
