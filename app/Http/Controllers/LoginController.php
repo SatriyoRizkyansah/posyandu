@@ -64,7 +64,7 @@ class LoginController extends Controller
         $request->session()->invalidate(); 
         $request->session()->regenerateToken(); 
 
-        return redirect('/login')->with('success', 'Logout Berhasil.');
+        return redirect('/')->with('success', 'Logout Berhasil.');
     }
 
     public function dashboard()
@@ -179,7 +179,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login-orangtua')->with('success', 'Logout Berhasil.');
+        return redirect('/')->with('success', 'Logout Berhasil.');
     }
     
     public function dashboard_orangtua(){
