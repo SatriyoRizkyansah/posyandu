@@ -4,13 +4,16 @@
   <div class="col-md-6 grid-margin stretch-card mx-auto">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Form Tambah Data Perkembangan Anak</h4>
+        <h4 class="card-title">Form Tambah Data Imunisasi Anak</h4>
         {{-- <p class="card-description">Basic form layout</p> --}}
         <form class="forms-sample" action="{{ route('imunisasi.store') }}" method="POST">
           @csrf
           <div class="form-group">
-            <label for="exampleInputUsername1">ID Anak</label>
-            <input type="text" class="form-control" id="exampleInputUsername1" placeholder="ID Anak" name="id_anak" />
+            <label for="id_anak">ID Anak</label>
+            <input type="text" class="form-control" id="id_anak" placeholder="ID Anak" name="id_anak" value="{{ $anak ? $anak->id : '' }}" {{ $anak ? 'readonly' : '' }} />
+            @if($anak)
+            <small class="form-text text-success">Nama Anak: {{ $anak->nama }}</small>
+            @endif
           </div>
           <div class="form-group">
             <label for="tanggal_posyandu">Tanggal Imunisasi</label>

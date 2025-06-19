@@ -31,9 +31,14 @@ class ImunisasiController extends Controller
         return view('dashboard.admin.imunisasi.detail', compact('immunisasi_data'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('dashboard.admin.imunisasi.create');
+        $id_anak = $request->query('id_anak');
+        $anak = null;
+        if ($id_anak) {
+            $anak = Anak::find($id_anak);
+        }
+        return view('dashboard.admin.imunisasi.create', compact('anak'));
     }
 
     public function store(Request $request)

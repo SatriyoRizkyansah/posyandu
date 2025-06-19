@@ -46,8 +46,12 @@
   <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Data Imunisasi Anak</h4>
-                    {{-- <p class="card-description">Add class <code>.table-striped</code></p> --}}
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="card-title mb-0">Data Imunisasi Anak</h4>
+                        <a href="{{ route('imunisasi.create', ['id_anak' => $immunisasi_data[0]->anak->id]) }}" class="btn btn-success">
+                            <i class="ti-plus menu-icon"></i> Tambah Imunisasi
+                        </a>
+                    </div>
 
                     <a href="{{ route('imunisasi.create') }}" class="btn btn-success btn-sm mb-4">
                         Tambah
