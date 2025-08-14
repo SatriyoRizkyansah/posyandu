@@ -18,7 +18,6 @@ return new class extends Migration
             $table->decimal('berat_badan', 8, 2);
             $table->string('ket_bb');
             $table->decimal('tinggi_badan', 8, 2);
-            $table->string('ket_bb');
             $table->foreign('id_anak')->references('id')->on('anak')->onDelete('cascade');
             $table->timestamps();
         });
